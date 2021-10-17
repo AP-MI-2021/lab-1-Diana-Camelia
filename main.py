@@ -1,80 +1,101 @@
-'''
-Returneaza true daca n este prim si false daca nu.
-'''
-def is_prime(n):
-  x=int(input("Dati numar:")
-  if x<2:
-        print ("NU")
-  else:
-        ok=True
-        for i in range (2, x//2+1)
-            if x%i == 0
-                ok=False
-        if ok:
-            print ("DA")
+"""
+1. [2.5p] Să se stabilească daca un număr n este prim sau nu. Exemplu: n = 3 este prim, dar n = 6 nu este prim.
+2. [2.5p] Să se calculeze produsul a n numere naturale Exemplu: n = 3 și numerele 3, 4, 5, produsul este 60.
+3. [5p] Să se calculeze CMMDC a 2 numere folosind doi algoritmi distincți.
+"""
+
+def is_prime():
+    """
+    Determina daca un numar dat este prim sau nu.
+    :param n: (x) un numar intreg.
+    :return: True, daca numarul este prim, respectiv False in caz contrar.
+    """
+    n = int(input("Dati un numar: "))
+    ok = True
+    if n < 2:
+        return False
+    for i in range(2, n // 2 + 1):
+        if n % i == 0 and ok == True:
+            ok = False
+    if ok:
+        return True
+    else:
+        return False
+
+def citire_lista(lst):
+    """
+    Citeste o lista cu n elemente date de la tastutura.
+    :param lst: O lista de numere intregi.
+    :return: Lista.
+    """
+    # solicităm numărul de elemente
+    n = int(input("Dati numarul de elemente: "))
+    for x in range(n):
+        lst.append(int(input("Element: ")))
+    return lst
+
+def produsul_a_n_nr(lst):
+    """
+    Calculeaza produsul elementelor din lista.
+    :param lst: Lista de numere intregi.
+    :return: Produsul elementelor din lista.
+    """
+    p = 1
+    x = len(lst)
+    for i in range(x):
+        p = p * lst[i]
+    return p
+
+def test_produsul_a_n_nr():
+    assert produsul_a_n_nr([2,3,1]) == 6
+    assert produsul_a_n_nr([1,1,3,2,2]) == 12
+    assert produsul_a_n_nr([1,10,99,0]) == 0
+    assert produsul_a_n_nr([3,4,5]) == 60
+
+def CMMDC1():
+    """
+    Calculeaza cel mai mare divizor comun a doua numere introduse de la tastatura (METODA 1).
+    param a: Primul numar intreg.
+    param b: Al doilea numar intreg.
+    :return: Cel mai mare divizor comun al celor doua numere.
+    """
+    print("Prima pereche de doua numere intregi: ")
+    a = int(input("Dati primul numar intreg: "))
+    b = int(input("Dati al doilea numar intreg: "))
+    while a != b:
+        if a > b:
+            a = a - b
         else:
-            print ("NU")
-'''
-Returneaza produsul numerelor din lista lst.
-'''
-def get_product(lst):
-  n=int(input("n= ")
-        lst=[]
-        s=1
-        for x in range(n):
-            s=s*x
-            lst(append(input))
-  print (s) 
-'''
-Returneaza CMMDC a doua numere x si y folosind primul algoritm.
-'''
-def get_cmmdc_v1(x, y):
-    while x!=y
-        if x<y:
-            y=y-x
-        else:
-            x=x-y
-        print(x)
-'''
-Returneaza CMMDC a doua numere x si y folosind al doilea algoritm.
-'''
-def get_cmmdc_v2(x, y):
-  while y!=0:
-      rest=x%y
-      x=y
-      y=rest
-  print(x)
-def main():
-  while True:
-    print("1. Primalitatea lui n")
-    print("2. Produsul numerelor")
-    print("3. Cmmdc a 2 numere in prima metoda")
-    print("4. Cmmdc a 2 numere in a doua metoda")
-    print("x. Iesire din program")
-    optiune=input("Alege optiune:")
-    if optiune == '1':
-      numar=int(input("Introdu numarul: "))
-      if is_prime(numar):
-        print(f'{numar} este numar prim')
-      else: print(f'{numar} nu este numar prim')
-    elif optiune =='2':
-      nr_str=input("Introduceti numerele cu cate un spatiu intre ele: ")
-      nr_str_lst=nr_str.split(' ')
-      nr_int_lst=[]
-      for nr_str in nr_str_lst:
-          nr_int_lst.append(int(nr_str))
-      get_product(nr_int_lst)
-    elif optiune == '3':
-      primul_nr=int(input("introduceti primul nr: "))
-      al_doilea_nr=int(input("introduceti al doilea nr: "))
-      get_cmmdc_v1(primul_nr,al_doilea_nr)
-    elif optiune == '4':
-      primul_nr = int(input("introduceti primul nr: "))
-      al_doilea_nr = int(input("introduceti al doilea nr: "))
-      get_cmmdc_v2(primul_nr, al_doilea_nr)
-    elif optiune == 'x':
-        break
-    else: 
-        print("Optiune invalida")
-if __name__ == '__main__':
-  main()
+            b = b - a
+    k = a
+    return k
+
+def CMMDC2():
+    """
+    Calculeaza cel mai mare divizor comun a doua numere introduse de la tastatura (METODA 2).
+    param c: Primul numar intreg.
+    param d: Al doilea numar intreg.
+    :return: Cel mai mare divizor comun al celor doua numere.
+    """
+    print("A doua pereche de doua numere intregi: ")
+    c = int(input("Dati primul numar intreg: "))
+    d = int(input("Dati al doilea numar intreg: "))
+    rest = c % d
+    e = 0
+    while rest != 0:
+        c = d
+        d = rest
+        rest = c % d
+        e = d
+    return e
+
+while True:
+    lst = []
+    test_produsul_a_n_nr()
+    a = is_prime()
+    print(a)
+    citire_lista(lst)
+    print(produsul_a_n_nr(lst))
+    print(CMMDC1())
+    print(CMMDC2())
+    break
